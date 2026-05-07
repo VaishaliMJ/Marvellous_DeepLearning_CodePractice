@@ -119,6 +119,34 @@ def calculateLoss(yTest,predResult):
     print(clsReport)
     print(BORDER)
 #####################################################################################################    
+#   Function Name   :   testNewData
+#   Input Params    :   model
+#   Output Params   :   None
+#   Description     :   Test New emp record
+#   Author          :   Vaishali M. Jorwekar              
+#####################################################################################################   
+def testNewData(model):
+    # ------------------------------------------------------------
+    # Step 7: Test with new student data
+    # Example:
+    # Study Hours = 4
+    # Attendance = 85
+    # Assignment Score = 63
+    # ------------------------------------------------------------
+
+    new_student = [[1, 85, 63]]
+    prediction = model.predict(new_student)
+    print(f"Student Details")
+    print(BORDER)
+    print(f"Study Hours :{new_student[0][0]} \nAttendance:{new_student[0][1]}\nAssignment Score:{new_student[0][2]}")
+    print(BORDER)
+    if prediction[0] == 1:
+        
+        print(f"\nNew Student Prediction : Pass")
+    else:
+        print(f"\nNew Student Prediction : Fail")
+    print(BORDER)    
+#####################################################################################################    
 #   Function Name   :   main
 #   Input Params    :   None
 #   Output Params   :   None
@@ -131,6 +159,7 @@ def main():
     model=createRNNMOdel()
     predResult=BuildModel(xTrain,xTest,yTrain,yTest,model)
     calculateLoss(yTest,predResult)
+    testNewData(model)
 #####################################################################################################    
 if __name__ =="__main__":
     main()
