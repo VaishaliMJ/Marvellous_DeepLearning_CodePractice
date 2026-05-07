@@ -8,6 +8,7 @@ import random,math
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import mean_absolute_error,classification_report
+from sklearn.preprocessing import StandardScaler
 BORDER="-"*65
 TEST_SIZE=0.25
 RANDOM_STATE=42
@@ -79,7 +80,7 @@ def createRNNMOdel():
 #   Author          :   Vaishali M. Jorwekar             
 #####################################################################################################
 def SplitDataset(x,y):
-    xTrain,xTest,yTrain,yTest=train_test_split(x, y, test_size=TEST_SIZE, random_state=RANDOM_STATE)
+    xTrain,xTest,yTrain,yTest=train_test_split(x, y, test_size=TEST_SIZE, random_state=RANDOM_STATE,stratify=y)
     return xTrain,xTest,yTrain,yTest
 #####################################################################################################    
 #   Function Name   :   BuildModel
@@ -145,7 +146,22 @@ def testNewData(model):
         print(f"\nNew Student Prediction : Pass")
     else:
         print(f"\nNew Student Prediction : Fail")
-    print(BORDER)    
+    print(BORDER)  
+#####################################################################################################
+#   Function Name   :   SplitDataset
+#   Input Params    :   xTrain,xTest
+#   Output Params   :   X_train_scaled,X_test_scaled,scaler_X 
+#   Description     :   Scale Data Set
+#   Author          :   Vaishali M. Jorwekar             
+#####################################################################################################
+def scaleDataSet(xTrain,xTest):
+
+    scaler_X = StandardScaler()
+
+    X_train_scaled = scaler_X.fit_transform(xTrain)
+    X_test_scaled  = scaler_X.transform(xTest)
+    
+    return X_train_scaled,X_test_scaled,scaler_X      
 #####################################################################################################    
 #   Function Name   :   main
 #   Input Params    :   None
@@ -156,8 +172,10 @@ def testNewData(model):
 def main():
     x,y=generateData()
     xTrain,xTest,yTrain,yTest=SplitDataset(x,y)
+    X_train_scaled,X_test_scaled,scaler_X=scaleDataSet(xTrain,xTest)
+
     model=createRNNMOdel()
-    predResult=BuildModel(xTrain,xTest,yTrain,yTest,model)
+    predResult=BuildModel(X_train_scaled,X_test_scaled,yTrain,yTest,model)
     calculateLoss(yTest,predResult)
     testNewData(model)
 #####################################################################################################    

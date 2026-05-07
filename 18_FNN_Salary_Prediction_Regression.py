@@ -59,12 +59,10 @@ def generateData():
 def SplitDataset(x,y):
     xTrain,xTest,yTrain,yTest=train_test_split(x, y, test_size=TEST_SIZE, random_state=RANDOM_STATE)
     return xTrain,xTest,yTrain,yTest
-
-
 #####################################################################################################
 #   Function Name   :   SplitDataset
 #   Input Params    :   xTrain,xTest,yTrain,yTest
-#   Output Params   :   inputs,weights,bias
+#   Output Params   :   Scaled Parameters
 #   Description     :   Scale Data Set
 #   Author          :   Vaishali M. Jorwekar             
 #####################################################################################################
