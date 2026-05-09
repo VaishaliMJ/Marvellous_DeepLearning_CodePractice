@@ -55,13 +55,13 @@ def generateData():
         print(f"{x[i]}    {y[i]}")   
     return x,y
 #####################################################################################################    
-#   Function Name   :   createRNNMOdel
+#   Function Name   :   createFNNMOdel
 #   Input Params    :   None
 #   Output Params   :   None
-#   Description     :   Create RNN model
+#   Description     :   Create FNN model
 #   Author          :   Vaishali M. Jorwekar              
 ##################################################################################################### 
-def createRNNMOdel():
+def createFNNMOdel():
     model = MLPClassifier(
     hidden_layer_sizes=(5,),
     activation='relu',
@@ -85,7 +85,7 @@ def SplitDataset(x,y):
 #   Function Name   :   BuildModel
 #   Input Params    :   None
 #   Output Params   :   None
-#   Description     :   Create RNN model
+#   Description     :   Build model
 #   Author          :   Vaishali M. Jorwekar              
 ##################################################################################################### 
 def BuildModel(xTrain,xTest,yTrain,yTest,model):
@@ -156,7 +156,7 @@ def testNewData(model):
 def main():
     x,y=generateData()
     xTrain,xTest,yTrain,yTest=SplitDataset(x,y)
-    model=createRNNMOdel()
+    model=createFNNMOdel()
     predResult=BuildModel(xTrain,xTest,yTrain,yTest,model)
     calculateLoss(yTest,predResult)
     testNewData(model)

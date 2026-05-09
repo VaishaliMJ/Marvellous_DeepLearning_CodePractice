@@ -80,13 +80,13 @@ def scaleDataSet(xTrain,xTest,yTrain,yTest):
     return X_train_scaled,X_test_scaled,y_train_scaled,y_test_scaled,scaler_y,scaler_X
 
 #####################################################################################################    
-#   Function Name   :   createRNNMOdel
+#   Function Name   :   createFNNMOdel
 #   Input Params    :   None
 #   Output Params   :   None
 #   Description     :   Create RNN model
 #   Author          :   Vaishali M. Jorwekar              
 ##################################################################################################### 
-def createRNNMOdel():
+def createFNNMOdel():
     model = MLPRegressor(
     hidden_layer_sizes=(6,),
     activation='relu',
@@ -99,7 +99,7 @@ def createRNNMOdel():
 #   Function Name   :   BuildModel
 #   Input Params    :   None
 #   Output Params   :   None
-#   Description     :   Create RNN model
+#   Description     :   Build model
 #   Author          :   Vaishali M. Jorwekar              
 ##################################################################################################### 
 def BuildModel(X_train_scaled,X_test_scaled,y_train_scaled,model):
@@ -149,7 +149,7 @@ def main():
         print(f"{x[i]}    {y[i]}")
     xTrain,xTest,yTrain,yTest=SplitDataset(x,y)
     X_train_scaled,X_test_scaled,y_train_scaled,y_test_scaled,scaler_y,scaler_X=scaleDataSet(xTrain,xTest,yTrain,yTest)
-    model=createRNNMOdel()
+    model=createFNNMOdel()
     pred_scaled=BuildModel(X_train_scaled,X_test_scaled,y_train_scaled,model)
     predictions=scaler_y.inverse_transform(pred_scaled.reshape(-1,1)).ravel()
     

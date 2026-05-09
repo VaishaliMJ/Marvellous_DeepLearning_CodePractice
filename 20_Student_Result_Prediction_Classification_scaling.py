@@ -1,5 +1,5 @@
 """-----------------------------------------------------------------------------------------------------
-                        Salary Prediction 
+                        Student Result Prediction 
                     (Student name - Vaishali Jorwekar)
 --------------------------------------------------------------------------------------------------------
 Problem statement:Student Result prediction using Meural Network
@@ -56,13 +56,13 @@ def generateData():
         print(f"{x[i]}    {y[i]}")   
     return x,y
 #####################################################################################################    
-#   Function Name   :   createRNNMOdel
+#   Function Name   :   createFNNMOdel
 #   Input Params    :   None
 #   Output Params   :   None
 #   Description     :   Create RNN model
 #   Author          :   Vaishali M. Jorwekar              
 ##################################################################################################### 
-def createRNNMOdel():
+def createFNNMOdel():
     model = MLPClassifier(
     hidden_layer_sizes=(5,),
     activation='relu',
@@ -86,7 +86,7 @@ def SplitDataset(x,y):
 #   Function Name   :   BuildModel
 #   Input Params    :   None
 #   Output Params   :   None
-#   Description     :   Create RNN model
+#   Description     :   Build Model
 #   Author          :   Vaishali M. Jorwekar              
 ##################################################################################################### 
 def BuildModel(xTrain,xTest,yTrain,yTest,model):
@@ -174,7 +174,7 @@ def main():
     xTrain,xTest,yTrain,yTest=SplitDataset(x,y)
     X_train_scaled,X_test_scaled,scaler_X=scaleDataSet(xTrain,xTest)
 
-    model=createRNNMOdel()
+    model=createFNNMOdel()
     predResult=BuildModel(X_train_scaled,X_test_scaled,yTrain,yTest,model)
     calculateLoss(yTest,predResult)
     testNewData(model)
